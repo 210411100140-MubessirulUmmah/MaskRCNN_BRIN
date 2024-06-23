@@ -5,11 +5,38 @@ import torch
 import detectron2
 import os
 import sys
-# Tentukan path ke direktori detectron2 di proyek Anda
-detectron2_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'detectron2'))
+import requests
+import zipfile
 
-# Tambahkan path ke sys.path
-sys.path.insert(0, detectron2_path)
+# URL ke file detectron2 yang sudah di-zip
+detectron2_url = "https://github.com/your-repo/detectron2/archive/refs/heads/main.zip"
+
+# Path lokal untuk menyimpan file detectron2
+detectron2_zip_path = os.path.join(os.path.dirname(__file__), 'detectron2.zip')
+detectron2_dir_path = os.path.join(os.path.dirname(__file__), 'detectron2')
+
+# Fungsi untuk mengunduh dan mengekstrak detectron2
+def download_and_extract_detectron2():
+    if not os.path.exists(detectron2_dir_path):
+        # Unduh file zip
+        response = requests.get(detectron2_url)
+        with open(detectron2_zip_path, 'wb') as f:
+            f.write(response.content)
+
+        # Ekstrak file zip
+        with zipfile.ZipFile(detectron2_zip_path, 'r') as zip_ref:
+            zip_ref.extractall(os.path.dirname(__file__))
+
+        # Hapus file zip setelah diekstrak
+        os.remove(detectron2_zip_path)
+
+# Panggil fungsi untuk mengunduh dan mengekstrak detectron2
+download_and_extract_detectron2()
+
+# Menambahkan direktori detectron2 ke sys.path
+sys.path.insert(0, detectron2_dir_path)
+
+
 from detectron2.engine import DefaultPredictor
 
 from detectron2.config import get_cfg
