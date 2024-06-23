@@ -3,6 +3,8 @@ import cv2
 import numpy as np
 import torch
 import detectron2
+import sys
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), 'detectron2')))
 from detectron2.engine import DefaultPredictor
 
 from detectron2.config import get_cfg
