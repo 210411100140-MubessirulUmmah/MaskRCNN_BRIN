@@ -5,7 +5,11 @@ import torch
 import detectron2
 import os
 import sys
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), 'detectron2')))
+# Tentukan path ke direktori detectron2 di proyek Anda
+detectron2_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'detectron2'))
+
+# Tambahkan path ke sys.path
+sys.path.insert(0, detectron2_path)
 from detectron2.engine import DefaultPredictor
 
 from detectron2.config import get_cfg
