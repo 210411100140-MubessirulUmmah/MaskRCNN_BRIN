@@ -5,16 +5,22 @@ import torch
 import detectron2
 import os
 import sys
+import subprocess
+
 # Tentukan path ke direktori detectron2 di proyek Anda
 detectron2_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'detectron2'))
 
 # Tambahkan path ke sys.path
 sys.path.insert(0, detectron2_path)
 
+try:
+    import detectron2
+except ImportError:
+    subprocess.run(["pip", "install", "git+https://github.com/facebookresearch/detectron2.git"])
 
-# from detectron2.engine import DefaultPredictor
+from detectron2.engine import DefaultPredictor
 
-# from detectron2.config import get_cfg
+from detectron2.config import get_cfg
 from detectron2.utils.visualizer import Visualizer
 from detectron2.data import MetadataCatalog, DatasetCatalog
 from detectron2 import model_zoo
