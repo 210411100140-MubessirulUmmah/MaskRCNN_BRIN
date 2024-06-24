@@ -18,7 +18,7 @@ def load_module(module_name, file_path):
     return module
 
 # Path ke direktori detectron2
-detectron2_path = os.path.join(os.path.dirname(__file__), 'detectron2')
+detectron2_path = os.path.join(os.path.dirname(__file__), 'detectron2', 'detectron2')
 
 # Memuat modul dari file
 defaults = load_module('defaults', os.path.join(detectron2_path, 'engine', 'defaults.py'))
