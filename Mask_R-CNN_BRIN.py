@@ -24,14 +24,15 @@ detectron2_path = os.path.join(os.path.dirname(__file__), 'detectron2')
 defaults = load_module('defaults', os.path.join(detectron2_path, 'engine', 'defaults.py'))
 config_defaults = load_module('config_defaults', os.path.join(detectron2_path, 'config', 'defaults.py'))
 visualizer = load_module('visualizer', os.path.join(detectron2_path, 'utils', 'visualizer.py'))
-datasets = load_module('datasets', os.path.join(detectron2_path, 'data', 'datasets.py'))
 model_zoo_module = load_module('model_zoo', os.path.join(detectron2_path, 'model_zoo', 'model_zoo.py'))
+dataset_mapper = load_module('dataset_mapper', os.path.join(detectron2_path, 'data', 'dataset_mapper.py'))
 
+# Menentukan kelas dan fungsi yang diperlukan
 DefaultPredictor = defaults.DefaultPredictor
 get_cfg = config_defaults.get_cfg
 Visualizer = visualizer.Visualizer
-MetadataCatalog = datasets.MetadataCatalog
-DatasetCatalog = datasets.DatasetCatalog
+MetadataCatalog = dataset_mapper.MetadataCatalog
+DatasetCatalog = dataset_mapper.DatasetCatalog
 model_zoo = model_zoo_module
 # Fungsi untuk memuat model yang telah dilatih
 @st.cache_resource
