@@ -18,7 +18,7 @@ try:
 except ImportError:
     subprocess.run(["pip", "install", "git+https://github.com/facebookresearch/detectron2.git"])
 
-os.system('pip install git+https://github.com/facebookresearch/detectron2.git')
+# os.system('pip install git+https://github.com/facebookresearch/detectron2.git')
 
 
 from detectron2.engine import DefaultPredictor
