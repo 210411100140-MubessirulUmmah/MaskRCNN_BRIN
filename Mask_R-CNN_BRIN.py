@@ -12,7 +12,7 @@ detectron2_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'detec
 sys.path.insert(0, detectron2_path)
 
 
-from detectron2.engine import DefaultPredictor
+# from detectron2.engine import DefaultPredictor
 
 from detectron2.config import get_cfg
 from detectron2.utils.visualizer import Visualizer
