@@ -5,35 +5,20 @@ import torch
 import detectron2
 import os
 import sys
-import requests
-import zipfile
-import imp
-import importlib.util
+# Tentukan path ke direktori detectron2 di proyek Anda
+detectron2_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'detectron2'))
 
-# Fungsi untuk memuat modul dari file
-def load_module(module_name, file_path):
-    spec = importlib.util.spec_from_file_location(module_name, file_path)
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module
+# Tambahkan path ke sys.path
+sys.path.insert(0, detectron2_path)
 
-# Path ke direktori detectron2
-detectron2_path = os.path.join(os.path.dirname(__file__), 'detectron2', 'detectron2')
 
-# Memuat modul dari file
-defaults = load_module('defaults', os.path.join(detectron2_path, 'engine', 'defaults.py'))
-config_defaults = load_module('config_defaults', os.path.join(detectron2_path, 'config', 'defaults.py'))
-visualizer = load_module('visualizer', os.path.join(detectron2_path, 'utils', 'visualizer.py'))
-model_zoo_module = load_module('model_zoo', os.path.join(detectron2_path, 'model_zoo', 'model_zoo.py'))
-dataset_mapper = load_module('dataset_mapper', os.path.join(detectron2_path, 'data', 'dataset_mapper.py'))
+from detectron2.engine import DefaultPredictor
 
-# Menentukan kelas dan fungsi yang diperlukan
-DefaultPredictor = defaults.DefaultPredictor
-get_cfg = config_defaults.get_cfg
-Visualizer = visualizer.Visualizer
-MetadataCatalog = dataset_mapper.MetadataCatalog
-DatasetCatalog = dataset_mapper.DatasetCatalog
-model_zoo = model_zoo_module
+from detectron2.config import get_cfg
+from detectron2.utils.visualizer import Visualizer
+from detectron2.data import MetadataCatalog, DatasetCatalog
+from detectron2 import model_zoo
+
 # Fungsi untuk memuat model yang telah dilatih
 @st.cache_resource
 def load_trained_model():
