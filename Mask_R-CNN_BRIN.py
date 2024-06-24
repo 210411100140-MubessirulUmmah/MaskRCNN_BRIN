@@ -7,42 +7,19 @@ import os
 import sys
 import requests
 import zipfile
+import imp
 
-# URL ke file detectron2 yang sudah di-zip
-detectron2_url = "https://github.com/your-repo/detectron2/archive/refs/heads/main.zip"
+# Path ke direktori detectron2
+detectron2_path = os.path.join(os.path.dirname(__file__), 'detectron2')
 
-# Path lokal untuk menyimpan file detectron2
-detectron2_zip_path = os.path.join(os.path.dirname(__file__), 'detectron2.zip')
-detectron2_dir_path = os.path.join(os.path.dirname(__file__), 'detectron2')
+# Memuat modul dari file
+DefaultPredictor = imp.load_source('DefaultPredictor', os.path.join(detectron2_path, 'engine', 'defaults.py')).DefaultPredictor
+get_cfg = imp.load_source('get_cfg', os.path.join(detectron2_path, 'config', 'defaults.py')).get_cfg
+Visualizer = imp.load_source('Visualizer', os.path.join(detectron2_path, 'utils', 'visualizer.py')).Visualizer
+MetadataCatalog = imp.load_source('MetadataCatalog', os.path.join(detectron2_path, 'data', 'datasets.py')).MetadataCatalog
+DatasetCatalog = imp.load_source('DatasetCatalog', os.path.join(detectron2_path, 'data', 'datasets.py')).DatasetCatalog
+model_zoo = imp.load_source('model_zoo', os.path.join(detectron2_path, 'model_zoo', 'model_zoo.py'))
 
-# Fungsi untuk mengunduh dan mengekstrak detectron2
-def download_and_extract_detectron2():
-    if not os.path.exists(detectron2_dir_path):
-        # Unduh file zip
-        response = requests.get(detectron2_url)
-        with open(detectron2_zip_path, 'wb') as f:
-            f.write(response.content)
-
-        # Ekstrak file zip
-        with zipfile.ZipFile(detectron2_zip_path, 'r') as zip_ref:
-            zip_ref.extractall(os.path.dirname(__file__))
-
-        # Hapus file zip setelah diekstrak
-        os.remove(detectron2_zip_path)
-
-# Panggil fungsi untuk mengunduh dan mengekstrak detectron2
-download_and_extract_detectron2()
-
-# Menambahkan direktori detectron2 ke sys.path
-sys.path.insert(0, detectron2_dir_path)
-
-
-from detectron2.engine import DefaultPredictor
-
-from detectron2.config import get_cfg
-from detectron2.utils.visualizer import Visualizer
-from detectron2.data import MetadataCatalog, DatasetCatalog
-from detectron2 import model_zoo
 
 # Fungsi untuk memuat model yang telah dilatih
 @st.cache_resource
