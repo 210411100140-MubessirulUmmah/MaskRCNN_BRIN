@@ -8,19 +8,31 @@ import sys
 import requests
 import zipfile
 import imp
+import importlib.util
+
+# Fungsi untuk memuat modul dari file
+def load_module(module_name, file_path):
+    spec = importlib.util.spec_from_file_location(module_name, file_path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
 # Path ke direktori detectron2
 detectron2_path = os.path.join(os.path.dirname(__file__), 'detectron2')
 
 # Memuat modul dari file
-DefaultPredictor = imp.load_source('DefaultPredictor', os.path.join(detectron2_path, 'engine', 'defaults.py')).DefaultPredictor
-get_cfg = imp.load_source('get_cfg', os.path.join(detectron2_path, 'config', 'defaults.py')).get_cfg
-Visualizer = imp.load_source('Visualizer', os.path.join(detectron2_path, 'utils', 'visualizer.py')).Visualizer
-MetadataCatalog = imp.load_source('MetadataCatalog', os.path.join(detectron2_path, 'data', 'datasets.py')).MetadataCatalog
-DatasetCatalog = imp.load_source('DatasetCatalog', os.path.join(detectron2_path, 'data', 'datasets.py')).DatasetCatalog
-model_zoo = imp.load_source('model_zoo', os.path.join(detectron2_path, 'model_zoo', 'model_zoo.py'))
+defaults = load_module('defaults', os.path.join(detectron2_path, 'engine', 'defaults.py'))
+config_defaults = load_module('config_defaults', os.path.join(detectron2_path, 'config', 'defaults.py'))
+visualizer = load_module('visualizer', os.path.join(detectron2_path, 'utils', 'visualizer.py'))
+datasets = load_module('datasets', os.path.join(detectron2_path, 'data', 'datasets.py'))
+model_zoo_module = load_module('model_zoo', os.path.join(detectron2_path, 'model_zoo', 'model_zoo.py'))
 
-
+DefaultPredictor = defaults.DefaultPredictor
+get_cfg = config_defaults.get_cfg
+Visualizer = visualizer.Visualizer
+MetadataCatalog = datasets.MetadataCatalog
+DatasetCatalog = datasets.DatasetCatalog
+model_zoo = model_zoo_module
 # Fungsi untuk memuat model yang telah dilatih
 @st.cache_resource
 def load_trained_model():
