@@ -16,7 +16,9 @@ sys.path.insert(0, detectron2_path)
 try:
     import detectron2
 except ImportError:
-    subprocess.run(["pip", "install", "git+https://github.com/facebookresearch/detectron2.git"])
+    print("Detectron2 not found, installing...")
+    subprocess.run([sys.executable, "-m", "pip", "install", "git+https://github.com/facebookresearch/detectron2.git"])
+    import detectron2
 
 # os.system('pip install git+https://github.com/facebookresearch/detectron2.git')
 
