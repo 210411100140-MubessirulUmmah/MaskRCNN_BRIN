@@ -2,13 +2,13 @@ streamlit
 opencv-python-headless==4.10.0.84
 numpy==1.23.5
 torch==2.3.1
+git+https://github.com/facebookresearch/detectron2.git
 av==10.0.0
 Pillow
 Requests==2.31.0
 streamlit_webrtc==0.47.1
 supervision==0.16.0
 ultralytics==8.0.208
-python==3.10
 
 
 
