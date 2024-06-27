@@ -26,6 +26,8 @@ st.title("👁‍🗨 Welding Defect Prediction with Mask R-CNN")
 
 # Tentukan path ke direktori detectron2 di proyek Anda
 detectron2_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'detectron2'))
+# Tambahkan direktori detectron2 yang dikloning ke PYTHONPATH
+sys.path.append(os.path.join(os.getcwd(), 'detectron2'))
 
 # Tambahkan path ke sys.path
 sys.path.insert(0, detectron2_path)

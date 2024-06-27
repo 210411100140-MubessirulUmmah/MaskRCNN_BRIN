@@ -1,5 +1,26 @@
 #!/bin/bash
 pip install --upgrade pip
-pip install torch==2.3.1  # Pastikan versi torch sesuai
+pip install torch==2.3.1
 pip install git+https://github.com/facebookresearch/detectron2.git
 python -c "import detectron2; print('Detectron2 version:', detectron2.__version__)"
+
+
+#!/bin/bash
+# Kloning repositori Detectron2
+git clone https://github.com/facebookresearch/detectron2.git
+
+# Masuk ke direktori yang dikloning
+cd detectron2
+
+# Instal dependensi
+pip install -r requirements.txt
+
+# Instal Detectron2
+pip install .
+
+# Kembali ke direktori root
+cd ..
+
+# Setel variabel lingkungan PYTHONPATH
+export PYTHONPATH=$PYTHONPATH:$(pwd)/detectron2
+
