@@ -2,6 +2,8 @@ streamlit
 opencv-python-headless==4.10.0.84
 numpy==1.23.5
 torch==2.3.1
+-f https://data.pyg.org/whl/torch-2.3.1+cpu.html
+torch-scatter
 git+https://github.com/facebookresearch/detectron2.git
 av==10.0.0
 Pillow
