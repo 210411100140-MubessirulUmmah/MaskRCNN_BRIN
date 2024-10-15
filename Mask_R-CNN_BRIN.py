@@ -100,7 +100,7 @@ Aplikasi ini merupakan pengembangan dari teknologi computer vision yang memanfaa
         st.title('Rangkuman')
         st.subheader("Mask R-CNN")
         st.write('Mask R-CNN (Mask Region-based Convolutional Neural Network) adalah algoritma deep learning yang digunakan untuk melakukan instance segmentation pada gambar. Instance segmentation adalah teknik yang tidak hanya mendeteksi objek dalam gambar, tetapi juga menentukan bentuk spesifik (mask) dari setiap objek terdeteksi. Ini merupakan pengembangan lebih lanjut dari algoritma Faster R-CNN, yang hanya melakukan object detection dan menghasilkan bounding box tanpa menentukan mask objek.')
-        st.image('Mask R-CNN.png', caption='Spatter', width=500)
+        st.image('Mask R-CNN.png', caption='Algorritma Mask R-CNN', width=500)
         st.subheader('Spatter')
         st.write('Spatter adalah salah satu jenis cacat pengelasan yang terjadi ketika terdapat percikan logam cair yang mengeras dan menempel di sekitar sambungan pengelasan. Ini dapat disebabkan oleh beberapa faktor, termasuk pengaturan pengelasan yang tidak tepat, seperti arus yang terlalu tinggi atau kecepatan pengelasan yang terlalu rendah, serta penggunaan parameter pengelasan yang tidak sesuai dengan jenis logam atau ketebalan material yang dielas. Spatter dapat mengurangi estetika dari sambungan pengelasan dan dapat menyebabkan masalah dalam proses penggabungan atau perakitan, karena percikan logam yang menempel dapat mengganggu penggabungan komponen atau mempengaruhi operasi mesin. Selain itu, spatter juga dapat menambah biaya produksi karena memerlukan pembersihan tambahan dan dapat mengurangi efisiensi penggunaan bahan baku')
         st.image('Spatter.png', caption='Spatter', width=500)
